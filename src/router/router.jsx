@@ -4,13 +4,15 @@ import Home from "../Pages/Home/Home"
 import AuthLayout from "../layout/AuthLayout"
 import Login from "../Pages/Authentication/Login/Login"
 import Registration from "../Pages/Authentication/Registration/Registration"
+import Coverage from "../Pages/Coverage/Coverage"
 
 export const router = createBrowserRouter([
     {
         path: "/",
         Component: RootLayout,
         children: [
-            { index: true, Component: Home }
+            { index: true, Component: Home },
+            { path: 'coverage', Component: Coverage }
         ]
     },
     {
@@ -18,7 +20,8 @@ export const router = createBrowserRouter([
         Component: AuthLayout,
         children: [
             { path: 'login', Component: Login },
-            { path: 'registration', Component: Registration }
+            { path: 'registration', Component: Registration },
+            
         ]
     }
 ])

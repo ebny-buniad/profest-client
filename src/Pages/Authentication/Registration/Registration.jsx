@@ -1,9 +1,11 @@
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router';
-import { FcGoogle } from "react-icons/fc";
 import Logo from '../../../Components/Logo/Logo';
+import useAuth from '../../../hooks/useAuth';
+import SocialLogin from '../../../Components/SocialLogin/SocialLogin';
 
 const Registration = () => {
+    const { createUser } = useAuth();
     const {
         register,
         handleSubmit,
@@ -11,8 +13,15 @@ const Registration = () => {
     } = useForm();
 
     const onSubmit = (data) => {
-        console.log(data);
-        alert('Form submitted successfully!');
+        const { email, password } = data;
+        console.log(email);
+        createUser(email, password)
+            .then((result) => {
+                console.log(result);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
     };
 
     return (
@@ -99,9 +108,7 @@ const Registration = () => {
                     </div>
                 </form>
                 <p>Already have any acoount? <Link to='/login'>Login</Link></p>
-                <div>
-                    <button className='btn w-full'><FcGoogle size={20} />Register with Google</button>
-                </div>
+                <SocialLogin></SocialLogin>
             </div>
         </div>
     );
